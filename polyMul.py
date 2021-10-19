@@ -1,4 +1,5 @@
 import numpy as np
+from numpy.lib.function_base import append
 
 def polySchool(p, q):
     ans = np.zeros(len(p)+len(q)-1)
@@ -19,39 +20,45 @@ def poly4(p, q):
         ans[0] = p[0] * q[0]
         ans[1] = p[0] * q[1] + p[1] * q[0]
         ans[2] = p[1] * q[1]
+        return ans
 
     else:
         # recurrsive calls for the 4 sub parts 
-        low = poly4(p[:l//2], q[:l//2])        # low terms are the x**0 indexes to the midway
-        middleA = poly4(p[:l//2], q[l//2:l])   # inside term of foil
-        middleB = poly4(p[l//2:l], q[:l//2])   # insider term of foil
+        low = poly4(p[0:l//2], q[0:l//2])        # low terms are the x**0 indexes to the midway
+        middleA = poly4(p[0:l//2], q[l//2:l])   # inside term of foil
+        middleB = poly4(p[l//2:l], q[0:l//2])   # insider term of foil
         high = poly4(p[l//2:l], q[l//2:l])     # high terms are the midpoint to the end of the array
         
         # Pad all the arrays so that they match the length of answer
-        np.append(low, np.zeros(l))
-        np.append(np.zeros(l//2), middleA, np.zeros(l//2))
-        np.append(np.zeros(l//2), middleB, np.zeros(l//2)) 
-        np.append(np.zeros(l), high)
+        half = int(l//2)
+        low = np.append(low, np.zeros(l))
+        middleA = np.append(np.zeros(half), middleA)
+        middleA = np.append(middleA, np.zeros(half))
+        middleB = np.append(np.zeros(half), middleB)
+        middleB = np.append(middleB, np.zeros(half)) 
+        high = np.append(np.zeros(l), high)
 
         # update the answer array
-        np.add(ans, low)
-        np.add(ans, middleA)
-        np.add(ans, middleB)
-        np.add(ans, high)
+        # print(low)
+        # print(middleA)
+        # print(middleB)
+        # print(high)
+        ans = np.add(ans, low)
+        ans = np.add(ans, middleA)
+        ans = np.add(ans, middleB)
+        ans = np.add(ans, high)
 
         # return updated array back up the chain
         return ans
 
-
+print("===============================================")
 print(polySchool([8, 7, 6, 5], [4, 3, 2, 1]))
-# x1 = np.arange(9.0).reshape((3, 3))
-# print(x1)
-# x2 = np.arange(3.0)
-# print(x2)
-# x3 = x1 + x2
-# print(x3)
-# print(np.add(x1, x1, x1))
 print(poly4([8, 7, 6, 5], [4, 3, 2, 1]))
+
+print("===============================================")
+print(polySchool([1, 2, 3, 4], [1, 2, 3, 4]))
 print(poly4([1, 2, 3, 4], [1, 2, 3, 4]))
 
+print("=====================================")
+print(np.add([1, 1, 1, 1, 1], [1, 1, 1]))
 
