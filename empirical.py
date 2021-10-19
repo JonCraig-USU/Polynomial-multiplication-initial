@@ -5,7 +5,7 @@ from polyMul import polySchool, poly3, poly4
 from nimTime import showTime
 
 
-sizes = [2**5, 2**6, 2**7, 2**8]
+sizes = [2**5, 2**6, 2**7, 2**8, 2**9]
 
 def empiricalSchool(n):
     arr0 = [0] * n
@@ -28,7 +28,7 @@ def empiricalSchool(n):
             polySchool(polyA, polyB)
 
 
- def empirical4(n):
+def empirical4(n):
     arr0 = [0] * n
     arr1 = [0] * n
     arr2 = [0] * n

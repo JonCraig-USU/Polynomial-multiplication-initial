@@ -48,7 +48,8 @@ def showTime(function, sizes, init = None, fit = 'exponential'):
     plt.show()
     if fit == 'exponential': #fit a straight line to n and log time
         slope, intercept, _, _, _ = stats.linregress([validSizes], [np.log(t) for t in timeLine])
-        print("time = %.6f %.3f ^ n" % (np.exp(intercept), np.exp(slope)))
+        eq = "time = %.6f %.3f ^ n" % (np.exp(intercept), np.exp(slope))
+        plt.text(0, 0, eq)
     elif fit == 'polynomial': # fit a straight line to log n and log time
         slope, intercept, _, _, _ = stats.linregress([np.log(v) for v in validSizes], [np.log(t) for t in timeLine])
         print("time = %.6f n ^ %.3f" % (np.exp(intercept), slope))

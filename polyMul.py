@@ -13,7 +13,7 @@ def poly4(p, q):
     ans = np.zeros(2 * l -1)
 
     if l == 1:
-        ans[0] = p[0] * p[q]
+        ans[0] = p[0] * q[0]
         return ans
     
     elif l == 2:
@@ -46,14 +46,14 @@ def poly4(p, q):
 
         # return updated array back up the chain
         return ans
-'''
-print("===============================================")
-print(polySchool([8, 7, 6, 5], [4, 3, 2, 1]))
-print(poly4([8, 7, 6, 5], [4, 3, 2, 1]))
 
-print("===============================================")
-print(polySchool([1, 2, 3, 4], [1, 2, 3, 4]))
-print(poly4([1, 2, 3, 4], [1, 2, 3, 4]))'''
+# print("===============================================")
+# print(polySchool([8, 7, 6, 5], [4, 3, 2, 1]))
+# print(poly4([8, 7], [4, 3]))
+
+# print("===============================================")
+# print(polySchool([1, 2, 3, 4], [1, 2, 3, 4]))
+# print(poly4([1, 2, 3, 4], [1, 2, 3, 4]))
 
 
 def poly3(p, q):
@@ -61,15 +61,18 @@ def poly3(p, q):
     ans = np.zeros(2 * l - 1)
 
     if l == 1:
-        ans[0] = p[0] * p[q]
-        return ans
-    
-    elif l == 2:
         ans[0] = p[0] * q[0]
-        ans[1] = p[0] * q[1] + p[1] * q[0]
-        ans[2] = p[1] * q[1]
         return ans
     
-    # else: 
+    # else:
+    #     a = p[odd]
+    #     b = p[even]
+    #     c = q[odd]
+    #     d = q[even]
+    #     inside = poly3(a+b, c+d)
+    #     left = poly3(a, c)
+    #     right = poly3(b, d)
+    #     left = np.add(left, inside)
+    #     return np.add(left, right)
 
 
