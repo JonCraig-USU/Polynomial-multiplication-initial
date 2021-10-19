@@ -39,10 +39,6 @@ def poly4(p, q):
         high = np.append(np.zeros(l), high)
 
         # update the answer array
-        # print(low)
-        # print(middleA)
-        # print(middleB)
-        # print(high)
         ans = np.add(ans, low)
         ans = np.add(ans, middleA)
         ans = np.add(ans, middleB)
@@ -50,15 +46,30 @@ def poly4(p, q):
 
         # return updated array back up the chain
         return ans
-
+'''
 print("===============================================")
 print(polySchool([8, 7, 6, 5], [4, 3, 2, 1]))
 print(poly4([8, 7, 6, 5], [4, 3, 2, 1]))
 
 print("===============================================")
 print(polySchool([1, 2, 3, 4], [1, 2, 3, 4]))
-print(poly4([1, 2, 3, 4], [1, 2, 3, 4]))
+print(poly4([1, 2, 3, 4], [1, 2, 3, 4]))'''
 
-print("=====================================")
-print(np.add([1, 1, 1, 1, 1], [1, 1, 1]))
+
+def poly3(p, q):
+    l = len(p)
+    ans = np.zeros(2 * l - 1)
+
+    if l == 1:
+        ans[0] = p[0] * p[q]
+        return ans
+    
+    elif l == 2:
+        ans[0] = p[0] * q[0]
+        ans[1] = p[0] * q[1] + p[1] * q[0]
+        ans[2] = p[1] * q[1]
+        return ans
+    
+    # else: 
+
 

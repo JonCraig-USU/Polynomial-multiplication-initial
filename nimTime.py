@@ -53,57 +53,5 @@ def showTime(function, sizes, init = None, fit = 'exponential'):
         slope, intercept, _, _, _ = stats.linregress([np.log(v) for v in validSizes], [np.log(t) for t in timeLine])
         print("time = %.6f n ^ %.3f" % (np.exp(intercept), slope))
 
-def winNim(n):
-  # implements NIM game where you can take between 1 and 10 stones off (if available)
-  # your turn to move with n stones on the table
-  # returns True if the position is a win for you, False if it is a loss
-  if n == 0:
-    return False
-  if n == 1:
-    return True
-  ans = True
-  for i in range(1,min(n+1, 11)):
-    ans = ans and winNim(n-i)
- #   if not ans:
- #     break
-  return not ans
 
-def winNimMemo(n):
-  # MEMOIZING 
-  # implements a NIM game where you can take between 1 and 10 stones (if available)
-  # your turn to move with n stones on the table
-  # returns True if the position is a win for you, False if it is a loss
-  global Cache # use Cache. Must be global, must be first initialized as empty
-  if n == 0:
-    return False
-  if n == 1:
-    return True
-  #check if we have solved this problem already, if so return the solution
-  if n in Cache: 
-    return Cache[n]
-  # need to solve this problem the first time
-  # use the same problem decomposition and solution construction step
-  ans = True
-  for i in range(1,min(n+1, 11)):
-    ans = ans and winNimMemo(n-i)
-  # store the answer in the cache and return it
-  Cache[n] = not ans
-  return Cache[n]
-
-#sets up the cache
-def initWinMemo():
-  # sets up a cache for the memoizing algorithm
-  global Cache
-  Cache = {}
-  
-# Experiment with the simple recursive algorithm
-# use a set of problems that arithmetically increase in size
-# uncomment the next line to run the experiment
-# showTime(winNim, [i for i in range(10, 30, 2)], fit = 'exponential')
-
-# Experiment with the memoizing algorithm
-# Use a geometricly increasing set of values
-# initialize the cache each time
-# uncomment the next line to run this experiment
-# note the biggest problem is kept small because of problems with Python's recursion limit
 # showTime(winNimMemo, [2**i for i in range(3, 12, 1)], init = initWinMemo, fit = 'polynomial')
